@@ -18,6 +18,8 @@ export const colors = {
   muted: '#6C757D',
   lightgray: '#EDEDED',
   darkgray: '#555555',
+  outlinegray: '#e5e5e5',
+  inputBgGray: '#f7f7f7',
   white: '#fff',
 };
 
