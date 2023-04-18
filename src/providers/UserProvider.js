@@ -9,7 +9,7 @@ const UserProvider = props => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [password, setPassword] = useState('');
+  // const [password, setPassword] = useState('');
 
   return (
     <UserContext.Provider
@@ -20,14 +20,14 @@ const UserProvider = props => {
         email,
         phone,
         address,
-        password,
+        // password,
         setId,
         setFname,
         setLname,
         setEmail,
         setPhone,
         setAddress,
-        setPassword,
+        // setPassword,
       }}>
       {props.children}
     </UserContext.Provider>

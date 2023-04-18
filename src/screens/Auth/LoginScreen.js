@@ -25,8 +25,7 @@ const LoginScreen = () => {
   const user = useContext(UserContext);
 
   const handleLogin = () => {
-    const url = 'http://samj.test/api/login';
-    // const url = 'http://localhost:8000/api/login';
+    const url = 'http://10.0.2.2:8000/api/login';
 
     if (email == '' || password == '') {
       Alert.alert('Error!', 'Please fill in the required fields!');
@@ -35,33 +34,53 @@ const LoginScreen = () => {
       formdata.append('email', email);
       formdata.append('password', password);
 
-      axios.post(url, formdata).then(response => {
-        if (response.data.message != 'success') {
-          Alert.alert(
-            'Invalid Credentials!',
-            'Your email or password is incorrect',
-          );
-        } else if (response.data.data.email_verified_at == null) {
-          Alert.alert(
-            'Email Unverified!',
-            'Please verify your email before logging in',
-          );
-        } else {
-          user.id = response.data.data.id;
-          user.fname = response.data.data.first_name;
-          user.lname = response.data.data.last_name;
-          user.email = response.data.data.email;
-          user.phone = response.data.data.phone;
-          user.address = response.data.data.address;
-          user.password = response.data.data.password;
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{name: 'HomeStack'}],
-            }),
-          );
-        }
-      });
+      axios
+        .post(url, formdata, {
+          // headers: {
+          //   'Content-Type': 'multipart/form-data',
+          //   Accept: 'application/json',
+          // },
+        })
+        .then(response => {
+          // console.log(response.data);
+          console.log(response.data.message);
+
+          if (response.data.message != 'success') {
+            Alert.alert(
+              'Invalid Credentials!',
+              'Your email or password is incorrect',
+            );
+            // console.log(response.data.message);
+            // console.log(formdata);
+          } else if (response.data.data.email_verified_at == null) {
+            Alert.alert(
+              'Email Unverified!',
+              'Please verify your email before logging in',
+            );
+          } else {
+            // console.log(response.data.data.first_name);
+            // console.log(response.data.data.last_name);
+            // console.log(response.data.data.email);
+            // console.log(response.data.data.phone);
+            // console.log(response.data.data.address);
+            // console.log(response.data.data.password);
+
+            user.id = response.data.data.id;
+            user.fname = response.data.data.first_name;
+            user.lname = response.data.data.last_name;
+            user.email = response.data.data.email;
+            user.phone = response.data.data.phone;
+            user.address = response.data.data.address;
+
+            // user.password = response.data.data.password;
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{name: 'HomeStack'}],
+              }),
+            );
+          }
+        });
     }
   };
 
@@ -96,12 +115,12 @@ const LoginScreen = () => {
       </TouchableOpacity> */}
       <View style={styles.signUpContainer}>
         <Text>New customer? </Text>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.push('Signup');
-        }}>
-        <Text style={styles.signupText}>Sign up</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push('Signup');
+          }}>
+          <Text style={styles.signupText}>Sign up</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -134,7 +153,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: colors.inputBgGray,
     borderRadius: 5,
-    borderWidth:  1,
+    borderWidth: 1,
     borderColor: colors.outlinegray,
     paddingHorizontal: 20,
     paddingVertical: 15,
