@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import SplashScreen from '../screens/Splash';
@@ -11,7 +11,7 @@ import ProfileScreen from '../screens/Profile/ProfileScreen';
 
 import {Ionicons} from '@expo/vector-icons';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const AuthStack = () => {
@@ -24,10 +24,12 @@ const AuthStack = () => {
       <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen name="HomeStack" component={HomeStack} />
     </Stack.Navigator>
   );
 };
 
+// const HomeStack = createNativeStackNavigator();
 const HomeStack = () => {
   return (
     <Stack.Navigator

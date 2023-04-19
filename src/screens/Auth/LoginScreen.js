@@ -5,6 +5,7 @@ import InputField from '../../components/InputField';
 import {useNavigation, CommonActions} from '@react-navigation/native';
 import {UserContext} from '../../providers/UserProvider';
 import axios from 'axios';
+import {API_URL} from '../../api';
 
 import {
   StyleSheet,
@@ -14,6 +15,7 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  ScrollView,
 } from 'react-native';
 
 const LoginScreen = () => {
@@ -25,7 +27,7 @@ const LoginScreen = () => {
   const user = useContext(UserContext);
 
   const handleLogin = () => {
-    const url = 'http://10.0.2.2:8000/api/login';
+    const url = `${API_URL}/login`;
 
     if (email == '' || password == '') {
       Alert.alert('Error!', 'Please fill in the required fields!');
@@ -33,6 +35,7 @@ const LoginScreen = () => {
       const formdata = new FormData();
       formdata.append('email', email);
       formdata.append('password', password);
+      console.log(url);
 
       axios
         .post(url, formdata, {
@@ -65,12 +68,12 @@ const LoginScreen = () => {
             // console.log(response.data.data.address);
             // console.log(response.data.data.password);
 
-            user.id = response.data.data.id;
-            user.fname = response.data.data.first_name;
-            user.lname = response.data.data.last_name;
-            user.email = response.data.data.email;
-            user.phone = response.data.data.phone;
-            user.address = response.data.data.address;
+            // user.id = response.data.data.id;
+            // user.fname = response.data.data.first_name;
+            // user.lname = response.data.data.last_name;
+            // user.email = response.data.data.email;
+            // user.phone = response.data.data.phone;
+            // user.address = response.data.data.address;
 
             // user.password = response.data.data.password;
             navigation.dispatch(
@@ -85,44 +88,46 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('../../assets/images/official_logo_.png')}
-        style={styles.logo}
-      />
-      <Text style={styles.heading}>ANNYEONGHASEYO!</Text>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          onChangeText={text => setEmail(text)}
-          value={email}
-          autoCapitalize="none"
+    <ScrollView style={{backgroundColor: '#fff'}}>
+      <View style={styles.container}>
+        <Image
+          source={require('../../assets/images/official_logo_.png')}
+          style={styles.logo}
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          onChangeText={text => setPassword(text)}
-          value={password}
-          secureTextEntry
-        />
-      </View>
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-      {/* <TouchableOpacity>
+        <Text style={styles.heading}>ANNYEONGHASEYO!</Text>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            onChangeText={text => setEmail(text)}
+            value={email}
+            autoCapitalize="none"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            onChangeText={text => setPassword(text)}
+            value={password}
+            secureTextEntry
+          />
+        </View>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+        {/* <TouchableOpacity>
         <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
       </TouchableOpacity> */}
-      <View style={styles.signUpContainer}>
-        <Text>New customer? </Text>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.push('Signup');
-          }}>
-          <Text style={styles.signupText}>Sign up</Text>
-        </TouchableOpacity>
+        <View style={styles.signUpContainer}>
+          <Text>New customer? </Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.push('Signup');
+            }}>
+            <Text style={styles.signupText}>Sign up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
