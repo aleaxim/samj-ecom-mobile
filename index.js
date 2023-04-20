@@ -25,6 +25,7 @@ const theme = {
     ...DefaultTheme.colors,
     primary: 'tomato',
     secondary: 'yellow',
+    secondaryContainer: '#FADADD',
   },
 };
 

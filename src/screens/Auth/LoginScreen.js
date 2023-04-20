@@ -111,7 +111,12 @@ const LoginScreen = () => {
             secureTextEntry
           />
         </View>
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        {/* <TouchableOpacity style={styles.button} onPress={handleLogin}> */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.push('HomeStack');
+          }}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         {/* <TouchableOpacity>

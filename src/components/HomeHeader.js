@@ -9,20 +9,20 @@ const Header = () => {
   return (
     <>
       <StatusBar
-        barStyle="light-content"
+        barStyle="dark-content"
         hidden={false}
-        backgroundColor={colors.secondaryBlue}
+        backgroundColor="#fff"
       />
       <View style={styles.headerContainer}>
         <Image
-          source={require('../assets/images/text_white_logo.png')}
+          source={require('../assets/images/official_logo_.png')}
           style={styles.headerStyle}
         />
         <View style={styles.cartStyle}>
           <IconButton
             icon="cart-outline"
             size={25}
-            iconColor="#fff"
+            iconColor={colors.primaryRed}
             onPress={() => {
               navigation.navigate('Cart');
             }}
@@ -41,15 +41,16 @@ const styles = StyleSheet.create({
   headerContainer: {
     flex: 1,
     padding: 6,
-    backgroundColor: colors.secondaryBlue,
+    backgroundColor: '#fff',
     flexDirection: 'row',
     paddingHorizontal: 20,
     alignItems: 'center',
+
     justifyContent: 'space-between',
   },
   headerStyle: {
-    height: 24,
-    width: 58,
+    height: 55,
+    width: 100,
   },
   cartStyle: {
     justifyContent: 'center',

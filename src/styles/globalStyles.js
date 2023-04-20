@@ -12,7 +12,7 @@ export const colors = {
   primaryRed: '#CD2E3A',
   secondaryRed: '#8F3035',
   primaryBlue: '#2E32CD',
-  secondaryBLue: '#2D3292',
+  secondaryBlue: '#2D3292',
   background: '#fff',
   darkBg: '#181616',
   muted: '#6C757D',
