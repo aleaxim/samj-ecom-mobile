@@ -1,12 +1,9 @@
 import React, {useState, useContext} from 'react';
 import {colors, fonts} from '../../styles/globalStyles';
-
-import InputField from '../../components/InputField';
 import {useNavigation, CommonActions} from '@react-navigation/native';
 import {UserContext} from '../../providers/UserProvider';
 import axios from 'axios';
 import {API_URL} from '../../api';
-
 import {
   StyleSheet,
   Text,
@@ -53,7 +50,7 @@ const LoginScreen = () => {
               'Invalid Credentials!',
               'Your email or password is incorrect',
             );
-            // console.log(response.data.message);
+          
             // console.log(formdata);
           } else if (response.data.data.email_verified_at == null) {
             Alert.alert(
@@ -61,21 +58,14 @@ const LoginScreen = () => {
               'Please verify your email before logging in',
             );
           } else {
-            // console.log(response.data.data.first_name);
-            // console.log(response.data.data.last_name);
-            // console.log(response.data.data.email);
-            // console.log(response.data.data.phone);
-            // console.log(response.data.data.address);
-            // console.log(response.data.data.password);
-
-            // user.id = response.data.data.id;
-            // user.fname = response.data.data.first_name;
-            // user.lname = response.data.data.last_name;
-            // user.email = response.data.data.email;
-            // user.phone = response.data.data.phone;
-            // user.address = response.data.data.address;
-
-            // user.password = response.data.data.password;
+            user.id = response.data.data.id;
+            user.fname = response.data.data.first_name;
+            user.lname = response.data.data.last_name;
+            user.email = response.data.data.email;
+            user.phone = response.data.data.phone;
+            user.address = response.data.data.address;
+            user.password = response.data.data.password;
+            
             navigation.dispatch(
               CommonActions.reset({
                 index: 0,
@@ -111,12 +101,7 @@ const LoginScreen = () => {
             secureTextEntry
           />
         </View>
-        {/* <TouchableOpacity style={styles.button} onPress={handleLogin}> */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.push('HomeStack');
-          }}>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         {/* <TouchableOpacity>

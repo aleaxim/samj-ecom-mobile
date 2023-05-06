@@ -1,11 +1,8 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import {colors, fonts} from '../../styles/globalStyles';
-
-import {useNavigation, CommonActions} from '@react-navigation/native';
-import {UserContext} from '../../providers/UserProvider';
-import axios from 'axios';
+import {useNavigation} from '@react-navigation/native';
 import {API_URL} from '../../api';
-
+import axios from 'axios';
 import {
   StyleSheet,
   Text,
@@ -27,10 +24,9 @@ const SignupScreen = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
 
-  const user = useContext(UserContext);
 
   const handleRegister = () => {
-    const url = `${API_URL}/register`;
+    const url = `${API_URL}/signup`;
 
     if (
       fname == '' ||
@@ -43,54 +39,29 @@ const SignupScreen = () => {
       Alert.alert('Error!', 'Please fill in all the fields!');
     } else {
       const formdata = new FormData();
+      formdata.append('first_name', fname);
+      formdata.append('last_name', lname);
       formdata.append('email', email);
+      formdata.append('phone', phone);
+      formdata.append('address', address);
       formdata.append('password', password);
 
       axios
-        .post(url, formdata, {
-          // headers: {
-          //   'Content-Type': 'multipart/form-data',
-          //   Accept: 'application/json',
-          // },
-        })
+        .post(url, formdata)
         .then(response => {
-          // console.log(response.data);
-          console.log(response.data.message);
+          // console.log(response.data.message);
 
-          if (response.data.message != 'success') {
+          if (response.data.message == 'success') {
             Alert.alert(
-              'Invalid Credentials!',
-              'Your email or password is incorrect',
-            );
-            // console.log(response.data.message);
-            // console.log(formdata);
-          } else if (response.data.data.email_verified_at == null) {
-            Alert.alert(
-              'Email Unverified!',
-              'Please verify your email before logging in',
-            );
-          } else {
-            // console.log(response.data.data.first_name);
-            // console.log(response.data.data.last_name);
-            // console.log(response.data.data.email);
-            // console.log(response.data.data.phone);
-            // console.log(response.data.data.address);
-            // console.log(response.data.data.password);
+              'Chukahae, chingu!',
+              'Your account has been created. Please check your email to verify your account first.');
 
-            // user.id = response.data.data.id;
-            // user.fname = response.data.data.first_name;
-            // user.lname = response.data.data.last_name;
-            // user.email = response.data.data.email;
-            // user.phone = response.data.data.phone;
-            // user.address = response.data.data.address;
-
-            // user.password = response.data.data.password;
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 0,
-                routes: [{name: 'HomeStack'}],
-              }),
-            );
+            navigation.push('Login');
+          }
+        }).catch (error => {
+          if (error.response.status === 422) {
+            console.log(error.response.data.error);
+            Alert.alert('Error!', error.response.data.error);
           }
         });
     }
@@ -149,9 +120,7 @@ const SignupScreen = () => {
         <TouchableOpacity style={styles.button} onPress={handleRegister}>
           <Text style={styles.buttonText}>Sign Up </Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity>
-        <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-      </TouchableOpacity> */}
+
         <View style={styles.signUpContainer}>
           <Text>Already have an account? </Text>
           <TouchableOpacity
@@ -177,7 +146,7 @@ const styles = StyleSheet.create({
     width: 340,
     height: 340,
     resizeMode: 'contain',
-    marginTop: -20,
+    marginTop: -30,
   },
   heading: {
     fontSize: 28,
@@ -214,11 +183,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  // forgotPasswordText: {
-  //   color: '#3F3D56',
-  //   textDecorationLine: 'underline',
-  //   marginBottom: 10,
-  // },
   signUpContainer: {
     flexDirection: 'row',
     marginBottom: 100,
