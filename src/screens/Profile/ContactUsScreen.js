@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   contentText: {
-    // fontFamily: fonts.workSans,
+    fontFamily: fonts.lato,
     textAlign: 'justify',
     lineHeight: 20,
   },

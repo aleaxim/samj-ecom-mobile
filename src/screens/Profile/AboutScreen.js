@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   contentText: {
-    // fontFamily: fonts.workSans,
+    fontFamily: fonts.lato,
     textAlign: 'justify',
     lineHeight: 20,
   },

@@ -10,8 +10,8 @@ import HomeScreen from '../screens/Home/HomeScreen';
 import IndexScreen from '../screens/IndexScreen';
 
 // import ProfileScreen from '../screens/Profile/ProfileScreen';
-// import MyProfileScreen from '../screens/Profile/MyProfileScreen';
-// import ChangePassScreen from '../screens/Profile/ChangePassScreen';
+import MyProfileScreen from '../screens/Profile/MyProfileScreen';
+import ChangePassScreen from '../screens/Profile/ChangePassScreen';
 import AboutScreen from '../screens/Profile/AboutScreen';
 import ContactUsScreen from '../screens/Profile/ContactUsScreen';
 
@@ -45,17 +45,35 @@ const HomeStack = () => {
       }}>
       <Stack.Screen name="Index" component={IndexScreen} />
       {/* <Stack.Screen name="Orders" component={HomeScreen} /> */}
-      {/* <Stack.Screen name="MyProfile" component={MyProfileScreen} />
-      <Stack.Screen name="Change Password" component={ChangePassScreen} /> */}
+      <Stack.Screen
+        name="MyProfile"
+        component={MyProfileScreen}
+        options={{
+          headerShown: true,
+          headerTitle: 'Edit Profile',
+          headerShadowVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="Change Password"
+        component={ChangePassScreen}
+        options={{
+          headerShown: true,
+          headerShadowVisible: false,
+        }}
+      />
       <Stack.Screen
         name="Contact Us"
         component={ContactUsScreen}
-        options={{headerShown: true}}
+        options={{
+          headerShown: true,
+          headerShadowVisible: false,
+        }}
       />
       <Stack.Screen
         name="About"
         component={AboutScreen}
-        options={{headerShown: true}}
+        options={{headerShown: true, headerShadowVisible: false}}
       />
     </Stack.Navigator>
   );
