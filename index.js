@@ -23,8 +23,9 @@ const theme = {
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'tomato',
-    secondary: 'yellow',
+    primary: '#2E32CD',
+    // primary: 'tomato',
+    // secondary: 'yellow',
     secondaryContainer: '#FADADD',
   },
 };

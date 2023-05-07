@@ -24,48 +24,44 @@ const ChangePassScreen = () => {
     if (oldPassword == '' || newPassword == '' || confNewPassword == '') {
       Alert.alert(
         'Error!',
-        'Please fill in ther required fields to edit your password!',
+        'Please fill in all the fields to change your password!',
       );
     } else if (newPassword != confNewPassword) {
-      Alert.alert('Error!', 'Password mismatch!');
+      Alert.alert(
+        'Error!',
+        'New password and confirm password does not match !',
+      );
     } else {
       const formdata = new FormData();
       formdata.append('id', user.id);
       formdata.append('old_password', oldPassword);
       formdata.append('new_password', newPassword);
 
-      axios.post(url, formdata).then(response => {
-        if (response.data == 'success') {
-          Alert.alert('Success!', 'Password has been updated successfully!');
-          user.password = newPassword;
-        } else {
-          Alert.alert(
-            'Error!',
-            'Old password does not match current Password!',
-          );
-        }
-      });
+      axios
+        .post(url, formdata)
+        .then(response => {
+          console.log(response.data.message);
+          if (response.data.message == 'success') {
+            Alert.alert('Success!', 'Password has been updated successfully!');
+            user.password = newPassword;
+          }
+        })
+        .catch(error => {
+          if (error.response.status === 422) {
+            console.log(error.response.data.error);
+            Alert.alert('Error!', error.response.data.error);
+          }
+        });
     }
   };
   return (
     <View style={styles.container}>
       <ScrollView>
-        {/*<Header />
-         <View style={styles.headerContainer}>
-          <Text variant="headlineMedium" style={{fontWeight: 'bold'}}>
-            CHANGE PASSWORD
-          </Text>
-        </View> */}
         <View style={styles.bodyContainer}>
-          {/* <View style={styles.headlineTitleContainer}>
-            <Text variant="bodyLarge" style={{fontWeight: 'bold'}}>
-              CHANGE PASSWORD
-            </Text>
-          </View> */}
           <View style={styles.cardBodyContainer}>
             <View style={styles.inputTextContainer}>
               <View style={{width: '80%'}}>
-                <Text>Old Password</Text>
+                <Text>Current Password</Text>
                 <TextInput
                   mode="outlined"
                   secureTextEntry={true}
@@ -85,7 +81,7 @@ const ChangePassScreen = () => {
             </View>
             <View style={styles.inputTextContainer}>
               <View style={{width: '80%'}}>
-                <Text>Re-enter New Password</Text>
+                <Text>Confirm New Password</Text>
                 <TextInput
                   mode="outlined"
                   secureTextEntry={true}

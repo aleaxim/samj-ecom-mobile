@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useCallback} from 'react';
 import {Text, TextInput} from 'react-native-paper';
 import {colors, fonts} from '../../styles/globalStyles';
 import {UserContext} from '../../providers/UserProvider';
@@ -10,14 +10,39 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  RefreshControl,
 } from 'react-native';
 
 const MyProfileScreen = () => {
+  const [refreshing, setRefreshing] = useState(false);
+
   const user = useContext(UserContext);
   const [fname, setFname] = useState(user.fname);
   const [lname, setLname] = useState(user.lname);
   const [phone, setPhone] = useState(user.phone);
   const [email, setEmail] = useState(user.email);
+  const [address, setAddress] = useState(user.address);
+
+  const onRefresh = useCallback(() => {
+    const url = `${API_URL}/get-profile`;
+
+    setRefreshing(true);
+    const formdata = new FormData();
+    formdata.append('id', user.id);
+
+    axios.post(url, formdata).then(response => {
+      // console.log(response.data.first_name);
+      setFname(response.data.first_name);
+      setLname(response.data.last_name);
+      setPhone(response.data.phone);
+      setAddress(response.data.address);
+      user.fname = fname;
+      user.lname = lname;
+      user.phone = phone;
+      user.address = address;
+      setRefreshing(false);
+    });
+  });
 
   const saveProfile = () => {
     const url = `${API_URL}/profile`;
@@ -30,6 +55,7 @@ const MyProfileScreen = () => {
       formdata.append('first_name', fname);
       formdata.append('last_name', lname);
       formdata.append('phone', phone);
+      formdata.append('address', address);
 
       axios
         .post(url, formdata)
@@ -52,7 +78,11 @@ const MyProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView style={{height: '100%', width: '100%'}}>
+      <ScrollView
+        style={{height: '100%', width: '100%'}}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         {/* <View style={styles.headerContainer}>
           <Text variant="headlineMedium" style={{fontWeight: 'bold'}}>
             Edit Profile
@@ -90,6 +120,15 @@ const MyProfileScreen = () => {
                 style={{width: '70%', height: 40}}
                 value={phone}
                 onChangeText={value => setPhone(value)}
+                mode="outlined"
+              />
+            </View>
+            <View style={styles.inputText}>
+              <Text>Address</Text>
+              <TextInput
+                style={{width: '70%', height: 40}}
+                value={address}
+                onChangeText={value => setAddress(value)}
                 mode="outlined"
               />
             </View>
