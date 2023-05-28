@@ -9,36 +9,42 @@ import {
 } from 'react-native';
 import {UserContext} from '../../providers/UserProvider';
 import {Text} from 'react-native-paper';
-import Header from '../../components/Header';
+import HomeHeader from '../../components/HomeHeader';
+import {API_URL} from '../../api';
+
 import moment from 'moment';
 import axios from 'axios';
+import {colors, fonts} from '../../styles/globalStyles';
 
 const OrderScreen = () => {
   const user = useContext(UserContext);
   const navigation = useNavigation();
   const [orders, setOrders] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const url = `${API_URL}/get-orders`;
+  // const url = `${API_URL}/cancel-order`;
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
+
     const formdata = new FormData();
     formdata.append('id', user.id);
-    axios
-      .post('http://10.0.2.2:8000/api/getallorders', formdata)
-      .then(response => {
-        setOrders(response.data);
-        setRefreshing(false);
-      });
+
+    axios.post(url, formdata).then(response => {
+      setOrders(response.data);
+      setRefreshing(false);
+      // console.log(response.data);
+    });
   });
 
   useEffect(() => {
     const formdata = new FormData();
     formdata.append('id', user.id);
-    axios
-      .post('http://10.0.2.2:8000/api/getallorders', formdata)
-      .then(response => {
-        setOrders(response.data);
-      });
+
+    axios.post(url, formdata).then(response => {
+      setOrders(response.data);
+      // console.log(response.data);
+    });
   }, []);
 
   const payment = item => {
@@ -55,45 +61,53 @@ const OrderScreen = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <Header />
+        <HomeHeader />
+
         <View
           style={{
             marginVertical: 30,
             marginHorizontal: 15,
             alignItems: 'center',
           }}>
-          <Text variant="titleLarge" style={{fontWeight: 'bold'}}>
-            ORDER HISTORY
+          <Text variant="headlineMedium" style={{fontWeight: 'bold'}}>
+            Order History
           </Text>
 
-          {/* BODY */}
-          {/* CARD */}
+          {/* BODY - CARD */}
           {orders.length != 0 ? (
+            // orders.map((item, index) => {
             orders.map((item, index) => {
               return (
                 <View
                   style={{
                     borderWidth: 1,
                     borderColor: 'black',
-                    width: '80%',
+                    width: '85%',
                     marginTop: 20,
-                  }}>
+                  }}
+                  key={item.id}>
                   <View
                     style={{
                       paddingVertical: 10,
                       paddingHorizontal: 15,
-                      backgroundColor: '#DDDDDD',
+                      backgroundColor: colors.secondaryBlue,
                       borderBottomWidth: 1,
                     }}>
-                    <Text>{item.status}</Text>
+                    <Text
+                      style={{
+                        color: colors.white,
+                        fontFamily: fonts.latoBlack,
+                      }}>
+                      {item.status}
+                    </Text>
                   </View>
                   <View
                     style={{
-                      paddingVertical: 30,
+                      paddingVertical: 20,
                       paddingHorizontal: 20,
-                      backgroundColor: '#F3F0F0',
+                      backgroundColor: colors.inputBgGray,
                     }}>
-                    <View style={{borderBottomWidth: 1}}>
+                    <View style={{borderBottomWidth: 1, paddingBottom: 20}}>
                       <View
                         style={{
                           flexDirection: 'row',
@@ -101,7 +115,7 @@ const OrderScreen = () => {
                           justifyContent: 'space-between',
                           marginVertical: 12,
                         }}>
-                        <Text>Order #</Text>
+                        <Text>Order No.</Text>
                         <Text>{item.trackingnumber}</Text>
                       </View>
                       <View
@@ -147,31 +161,35 @@ const OrderScreen = () => {
                       style={{
                         marginTop: 20,
                         flexDirection: 'row',
-                        justifyContent: 'space-between',
+                        justifyContent: 'flex-end',
                       }}>
-                      {item.status == 'For Payment' ? (
+                      {/* {item.status == 'For Payment' ? (
                         <TouchableOpacity
                           style={{
                             backgroundColor: '#5cb85c',
                             paddingHorizontal: 20,
                             paddingVertical: 5,
-                            borderRadius: 8,
+                            // borderRadius: 8,
                           }}
                           onPress={() => payment(item)}>
                           <Text style={{color: '#fff'}}>Payment</Text>
                         </TouchableOpacity>
                       ) : (
                         <View></View>
+                      )} */}
+                      {item.status != 'Cancelled' ? (
+                        <TouchableOpacity
+                          style={{
+                            backgroundColor: colors.primaryRed,
+                            paddingHorizontal: 20,
+                            paddingVertical: 5,
+                            // borderRadius: 8,
+                          }}>
+                          <Text style={{color: '#fff'}}>Cancel</Text>
+                        </TouchableOpacity>
+                      ) : (
+                        <View></View>
                       )}
-                      <TouchableOpacity
-                        style={{
-                          backgroundColor: '#F56161',
-                          paddingHorizontal: 20,
-                          paddingVertical: 5,
-                          borderRadius: 8,
-                        }}>
-                        <Text style={{color: '#fff'}}>Cancel</Text>
-                      </TouchableOpacity>
                     </View>
                   </View>
                 </View>

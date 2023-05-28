@@ -15,7 +15,8 @@ import ChangePassScreen from '../screens/Profile/ChangePassScreen';
 import AboutScreen from '../screens/Profile/AboutScreen';
 import ContactUsScreen from '../screens/Profile/ContactUsScreen';
 
-// import {Ionicons} from '@expo/vector-icons';
+import CartScreen from '../screens/Cart/CartScreen';
+import ProductScreen from '../screens/Product/ProductScreen';
 
 const Stack = createNativeStackNavigator();
 // const Tab = createBottomTabNavigator();
@@ -74,6 +75,20 @@ const HomeStack = () => {
         name="About"
         component={AboutScreen}
         options={{headerShown: true, headerShadowVisible: false}}
+      />
+      <Stack.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          headerShown: true,
+          headerTitle: '',
+          headerShadowVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="Product"
+        component={ProductScreen}
+        options={{headerShown: true, headerTransparent: true, headerTitle: ''}}
       />
     </Stack.Navigator>
   );

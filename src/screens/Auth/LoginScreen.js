@@ -18,8 +18,11 @@ import {
 const LoginScreen = () => {
   const navigation = useNavigation();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+
+  const [email, setEmail] = useState('test@example.com');
+  const [password, setPassword] = useState('123');
 
   const user = useContext(UserContext);
 
@@ -50,7 +53,7 @@ const LoginScreen = () => {
               'Invalid Credentials!',
               'Your email or password is incorrect',
             );
-          
+
             // console.log(formdata);
           } else if (response.data.data.email_verified_at == null) {
             Alert.alert(
@@ -65,7 +68,7 @@ const LoginScreen = () => {
             user.phone = response.data.data.phone;
             user.address = response.data.data.address;
             user.password = response.data.data.password;
-            
+
             navigation.dispatch(
               CommonActions.reset({
                 index: 0,

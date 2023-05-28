@@ -20,14 +20,17 @@ import {MaterialCommunityIcons} from 'react-native-vector-icons';
 
 const theme = {
   ...DefaultTheme,
-  roundness: 2,
+  roundness: 1,
   colors: {
     ...DefaultTheme.colors,
     primary: '#2E32CD',
-    // primary: 'tomato',
-    // secondary: 'yellow',
+    onPrimary: '#fff',
+    secondary: '#2E32CD',
+    primaryContainer: '2E32CD',
     secondaryContainer: '#FADADD',
+    onSurface: '#181616',
   },
+  mode: 'exact',
 };
 
 export default function Main() {
