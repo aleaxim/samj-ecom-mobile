@@ -1,4 +1,9 @@
 {
   "name": "SAMJmobile",
-  "displayName": "SAMJ KMART"
+  "displayName": "SAMJ KMART",
+  "extra": {
+    "eas": {
+      "projectId": "53e855cf-d3f1-4adf-a7ca-142335178e10"
+    }
+  }
 }
