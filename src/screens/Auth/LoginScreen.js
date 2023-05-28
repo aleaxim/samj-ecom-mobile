@@ -38,14 +38,8 @@ const LoginScreen = () => {
       console.log(url);
 
       axios
-        .post(url, formdata, {
-          // headers: {
-          //   'Content-Type': 'multipart/form-data',
-          //   Accept: 'application/json',
-          // },
-        })
+        .post(url, formdata)
         .then(response => {
-          // console.log(response.data);
           console.log(response.data.message);
 
           if (response.data.message != 'success') {
@@ -54,7 +48,6 @@ const LoginScreen = () => {
               'Your email or password is incorrect',
             );
 
-            // console.log(formdata);
           } else if (response.data.data.email_verified_at == null) {
             Alert.alert(
               'Email Unverified!',

@@ -8,14 +8,6 @@ const ContactUsScreen = () => {
     <View style={styles.container}>
       <ScrollView style={{height: '100%', width: '100%'}}>
         <View style={styles.bodyContainer}>
-          {/* <View style={styles.headlineTitleContainer}>
-            <Text variant="headlineMedium" style={{fontWeight: 'bold'}}>
-              Contact Us
-            </Text> 
-           <Text variant="bodyLarge" style={{fontWeight: 'bold'}}>
-              Get in Touch
-            </Text> 
-          </View>*/}
           <View style={styles.contentContainer}>
             <List.Section>
               <Text
@@ -23,7 +15,6 @@ const ContactUsScreen = () => {
                 style={{fontWeight: 'bold', marginTop: 10}}>
                 Get in Touch
               </Text>
-              {/* <List.Subheader>Get in Touch</List.Subheader> */}
               <List.Item
                 title="+63 968 880 3991"
                 left={() => (
@@ -56,8 +47,6 @@ const ContactUsScreen = () => {
                 style={{fontWeight: 'bold', marginTop: 10}}>
                 Socials
               </Text>
-              {/* <List.Subheader>Socials</List.Subheader> */}
-
               <List.Item
                 title="m.me/SAMJKMART/"
                 left={() => (

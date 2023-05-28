@@ -1,15 +1,11 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import SplashScreen from '../screens/Splash';
-
 import LoginScreen from '../screens/Auth/LoginScreen';
 import SignupScreen from '../screens/Auth/SignupScreen';
-import HomeScreen from '../screens/Home/HomeScreen';
 import IndexScreen from '../screens/IndexScreen';
 
-// import ProfileScreen from '../screens/Profile/ProfileScreen';
 import MyProfileScreen from '../screens/Profile/MyProfileScreen';
 import ChangePassScreen from '../screens/Profile/ChangePassScreen';
 import AboutScreen from '../screens/Profile/AboutScreen';
@@ -19,7 +15,6 @@ import CartScreen from '../screens/Cart/CartScreen';
 import ProductScreen from '../screens/Product/ProductScreen';
 
 const Stack = createNativeStackNavigator();
-// const Tab = createBottomTabNavigator();
 
 const AuthStack = () => {
   return (
@@ -36,7 +31,7 @@ const AuthStack = () => {
   );
 };
 
-// const HomeStack = createNativeStackNavigator();
+
 const HomeStack = () => {
   return (
     <Stack.Navigator
@@ -45,7 +40,6 @@ const HomeStack = () => {
         headerShown: false,
       }}>
       <Stack.Screen name="Index" component={IndexScreen} />
-      {/* <Stack.Screen name="Orders" component={HomeScreen} /> */}
       <Stack.Screen
         name="MyProfile"
         component={MyProfileScreen}
@@ -102,7 +96,6 @@ const AppNavigator = () => {
       }}>
       <Stack.Screen name="Auth" component={AuthStack} />
       <Stack.Screen name="Home" component={HomeStack} />
-      {/* <Stack.Screen name="App" component={AppTabNavigator} /> */}
     </Stack.Navigator>
   );
 };

@@ -83,18 +83,7 @@ const MyProfileScreen = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        {/* <View style={styles.headerContainer}>
-          <Text variant="headlineMedium" style={{fontWeight: 'bold'}}>
-            Edit Profile
-          </Text>
-        </View> */}
-
         <View style={styles.bodyContainer}>
-          {/* <View style={styles.headlineTitleContainer}>
-            <Text variant="bodyLarge" style={{fontWeight: 'bold'}}>
-              EDIT PROFILE
-            </Text>
-          </View> */}
           <View style={styles.cardBodyContainer}>
             <View style={styles.inputText}>
               <Text>First Name</Text>
@@ -160,53 +149,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  // headerContainer: {
-  //   flex: 0.2,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   marginVertical: 20,
-  // },
   bodyContainer: {
-    // flex: 0.8,
     alignItems: 'center',
-    // justifyContent: 'flex-start',
   },
-  // headlineTitleContainer: {
-  //   borderWidth: 1,
-  //   backgroundColor: '#cfcfcf',
-  //   width: '90%',
-  //   paddingHorizontal: 20,
-  //   paddingVertical: 12,
-  //   marginVertical: 20,
-  // },
   cardBodyContainer: {
-    // height: '55%',
     width: '90%',
-    // borderBottomWidth: 1,
     paddingVertical: 17,
   },
   inputText: {
     flexDirection: 'row',
-    // width: '90%',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 5,
     marginLeft: 10,
   },
-  // buttonContainer: {
-  //   width: '80%',
-  //   height: 150,
-  //   alignItems: 'flex-end',
-  //   paddingTop: 40,
-  // },
-
   buttonContainer: {
     backgroundColor: colors.primaryRed,
-    // justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 15,
     marginVertical: 20,
-    // width: '95%',
   },
 });
 

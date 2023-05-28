@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 20,
-    // fontWeight: 'bold',
+
     fontFamily: fonts.latoBold,
     color: colors.primaryRed,
     marginBottom: 10,
@@ -134,7 +134,6 @@ const styles = StyleSheet.create({
   quantityButton: {
     fontSize: 24,
     paddingHorizontal: 10,
-    // paddingVertical: 5,
     backgroundColor: colors.lightgray,
     borderRadius: 5,
   },
@@ -150,7 +149,6 @@ const styles = StyleSheet.create({
   },
   addToCartButtonText: {
     fontSize: 18,
-    // fontWeight: 'bold',
     color: '#fff',
     fontFamily: fonts.latoBold,
   },

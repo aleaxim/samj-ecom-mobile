@@ -111,28 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  // headerContainer: {
-  //   flex: 0.2,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   marginVertical: 20,
-  // },
-  bodyContainer: {
-    // alignItems: 'center',
-    // justifyContent: 'space-around',
-  },
-  // headlineTitleContainer: {
-  //   borderWidth: 1,
-  // backgroundColor: '#cfcfcf',
-  //   width: '90%',
-  //   paddingHorizontal: 20,
-  //   paddingVertical: 12,
-  //   marginVertical: 20,
-  // },
   cardBodyContainer: {
-    // height: '50%',
-    // width: '90%',
-    // borderBottomWidth: 1,
     paddingVertical: 20,
     marginBottom: 10,
   },
@@ -143,15 +122,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: '80%',
-    // alignItems: 'flex-end',
-    // width: '90%',
     backgroundColor: colors.primaryRed,
-    // justifyContent: 'flex-end',
     alignItems: 'center',
     paddingVertical: 15,
     marginTop: 20,
-    // marginBottom: 50,
-    // borderRadius: 5,
   },
 });
 

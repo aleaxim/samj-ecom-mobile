@@ -13,14 +13,8 @@ const ProductCard = ({id, name, price, image, description, navigation}) => (
       borderWidth: 1,
       borderColor: colors.muted,
     }}>
-    {/* <Card.Cover source={{uri: 'https://picsum.photos/700'}} style={{ width: '100%', height: 150}}/> */}
     <Card.Cover source={image} style={{ width: '100%', height: 150}}/>
 
-    {/* <Card.Title
-      title="Card Title"
-      subtitle="Card Subtitle"
-      left={LeftContent}
-    /> */}
     <Card.Content>
       <Text variant="bodyLarge" style={{fontFamily: fonts.latoBold, marginTop: 10}}>
         {name}
