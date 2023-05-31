@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useContext, useState, useCallback} from 'react';
+import React, {useEffect, useContext, useState, useCallback, Alert} from 'react';
 import {
   View,
   StyleSheet,
@@ -22,7 +22,6 @@ const OrderScreen = () => {
   const [orders, setOrders] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const url = `${API_URL}/get-orders`;
-  // const url = `${API_URL}/cancel-order`;
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -53,6 +52,27 @@ const OrderScreen = () => {
       trackingnumber: item.trackingnumber,
       total: item.total,
     });
+  };
+
+  
+  const handleCancel = async (paymentId) => {
+
+    const formdata = new FormData();
+    try {
+      formdata.append('id', paymentId);
+
+      const response = await axios.post(
+        `${API_URL}/cancel-order`,
+        formdata,
+      );
+      Alert.alert(
+        'Order Cancelled!',
+        'Your order has been cancelled',
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -179,6 +199,7 @@ const OrderScreen = () => {
                       )} */}
                       {item.status != 'Cancelled' ? (
                         <TouchableOpacity
+                          onPress={() => handleCancel(item.id)}
                           style={{
                             backgroundColor: colors.primaryRed,
                             paddingHorizontal: 20,
